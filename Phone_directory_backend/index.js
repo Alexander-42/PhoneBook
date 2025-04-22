@@ -40,10 +40,6 @@ app.use(morgan(function (tokens, req, res) {
       tokens['body'](req, res)
     ].join(' ')
   }))
-
-app.get('/', (request, response) => {
-    response.send('<h1>Hello World!</h1>')
-})
   
 app.get('/info', (request, response) => {
     response.send(
