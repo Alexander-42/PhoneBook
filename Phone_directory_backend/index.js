@@ -111,8 +111,12 @@ app.post('/api/persons', (request, response) => {
 
 app.delete('/api/persons/:id', (request, response) => {
     const id = request.params.id
-    notes = persons.filter((person) => person.id !== id)
-  
+    const toBeDeleted = persons.filter((person) => person.id !== id)
+    
+    const deleteIndex = persons.indexOf(toBeDeleted)
+
+    persons.splice(deleteIndex, 1)
+
     response.status(204).end()
 })
 
