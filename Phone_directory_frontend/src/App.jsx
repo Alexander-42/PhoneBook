@@ -50,7 +50,7 @@ const App = () => {
           )
           setTimeout(() => {
             setSuccessMessage(null)
-          }, 5000)
+          }, 2000)
         }
       ).catch((error) => {
         setErrorMessage(
@@ -58,14 +58,14 @@ const App = () => {
         )
         setTimeout(() => {
           setErrorMessage(null)
-        }, 5000)
+        }, 2000)
         setPersons(persons.filter((n) => n.id !== existingPerson.id))
       })
     } else {
       setSuccessMessage(`Number for ${existingPerson.name} was not changed`)
       setTimeout(() => {
         setSuccessMessage(null)
-      }, 5000)
+      }, 2000)
     }
     setNewName('')
     setNewNumber('')
@@ -79,14 +79,6 @@ const App = () => {
     if (existingPerson) {
       updateExisting(existingPerson)
     } else {
-      if (newNumber === '') {
-        setErrorMessage('Please add a number')
-        setTimeout(() => {
-          setErrorMessage(null)
-        }, 1000)
-        setNewName('')
-        setNewNumber('')
-      }
       const nameObject = {
         name: newName,
         number: newNumber,
@@ -102,9 +94,14 @@ const App = () => {
           setSuccessMessage(`Added ${newName}`)
           setTimeout(() => {
             setSuccessMessage(null)
+          }, 2000)
+        })
+        .catch(error => {
+          setErrorMessage(JSON.stringify(error.response.data))
+          setTimeout(() => {
+            setErrorMessage(null)
           }, 5000)
-        }
-      )
+        })
     }
   }
 
@@ -129,7 +126,7 @@ const App = () => {
           setSuccessMessage(`Deleted ${name}`)
           setTimeout(() => {
             setSuccessMessage(null)
-          }, 5000)
+          }, 2000)
           personService.getAll().
             then((response) => {
               setPersons(response.data)
@@ -140,14 +137,14 @@ const App = () => {
           )
           setTimeout(() => {
             setErrorMessage(null)
-          }, 5000)
+          }, 2000)
           setPersons(persons.filter((n) => n.id !== id))
         })
     } else {
       setSuccessMessage("Deletion cancelled")
       setTimeout(()=>{
         setSuccessMessage(null)
-      }, 5000)
+      }, 2000)
     }
   }
 
