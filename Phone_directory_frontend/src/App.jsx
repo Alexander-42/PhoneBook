@@ -29,13 +29,16 @@ const App = () => {
     )
     
     if (confirmChange) {
-      if (!newNumber) {
+      if (newNumber === '') {
         setErrorMessage(
           'Please add a number'
         )
+        setNewName('')
+        setNewNumber('')
         setTimeout(() => {
           setErrorMessage(null)
         }, 1000)
+        return
       }
       personService
         .update(existingPerson.id, {name: newName, number: newNumber})
@@ -76,6 +79,14 @@ const App = () => {
     if (existingPerson) {
       updateExisting(existingPerson)
     } else {
+      if (newNumber === '') {
+        setErrorMessage('Please add a number')
+        setTimeout(() => {
+          setErrorMessage(null)
+        }, 1000)
+        setNewName('')
+        setNewNumber('')
+      }
       const nameObject = {
         name: newName,
         number: newNumber,
