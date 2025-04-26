@@ -7,7 +7,8 @@
     "dev": "node --watch index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build:ui": "rmdir /S /Q \"dist\" && cd ../Phone_directory_frontend && npm run build && xcopy dist \"../Phone_directory_backend/dist\" /E /I /H /Y",
-    "deploy:full": "npm run build:ui && git add ../. && git commit -m \"uibuild\" && git push"
+    "deploy:full": "npm run build:ui && git add ../. && git commit -m \"uibuild\" && git push",
+    "lint": "eslint ."
   },
   "author": "Alexander Oiling",
   "license": "MIT",
@@ -17,5 +18,11 @@
     "express": "^5.1.0",
     "mongoose": "^8.14.0",
     "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.25.1",
+    "@stylistic/eslint-plugin-js": "^4.2.0",
+    "eslint": "^9.25.1",
+    "globals": "^16.0.0"
   }
 }
