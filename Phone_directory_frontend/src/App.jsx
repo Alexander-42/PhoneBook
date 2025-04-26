@@ -53,13 +53,23 @@ const App = () => {
           }, 2000)
         }
       ).catch((error) => {
-        setErrorMessage(
-          `${existingPerson.name} was already removed from server`
-        )
-        setTimeout(() => {
-          setErrorMessage(null)
-        }, 2000)
-        setPersons(persons.filter((n) => n.id !== existingPerson.id))
+        if (JSON.stringify(error.response.data).includes('is not a valid phone number')) {
+          setErrorMessage(
+            `${JSON.stringify(error.response.data)}`
+          )
+          setTimeout(() => {
+            setErrorMessage(null)
+          }, 2000)
+        } else {
+        console.log(JSON.stringify(error.response.data))
+          setErrorMessage(
+            `${newName} was already removed from the server`
+          )
+          setTimeout(() => {
+            setErrorMessage(null)
+          }, 2000)
+          setPersons(persons.filter((n) => n.id !== existingPerson.id))
+        }
       })
     } else {
       setSuccessMessage(`Number for ${existingPerson.name} was not changed`)
