@@ -68,19 +68,21 @@ app.get('/', (request, response) => {
     response.send("<div> Hello World!</div>")
 })
   
-app.get('/info', (request, response) => {
-    response.send(
-        `
-        <div>
+app.get('/info', async (request, response, next) => {
+    Person.countDocuments({})
+        .then(count => {response.send(
+            `
             <div>
-                Phonebook has info for ${persons.length} persons.
+                <div>
+                    Phonebook has info for ${count} persons.
+                </div>
+                <div>
+                    ${new Date().toString()}
+                </div>
             </div>
-            <div>
-                ${new Date().toString()}
-            </div>
-        </div>
-        `
-    )
+            `
+        )})
+        .catch(error => next(error))
 })
 
 app.get('/api/persons', (request, response, next) => {
