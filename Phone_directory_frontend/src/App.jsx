@@ -29,6 +29,14 @@ const App = () => {
     )
     
     if (confirmChange) {
+      if (!newNumber) {
+        setErrorMessage(
+          'Please add a number'
+        )
+        setTimeout(() => {
+          setErrorMessage(null)
+        }, 1000)
+      }
       personService
         .update(existingPerson.id, {name: newName, number: newNumber})
         .then((returnedPerson) => {
